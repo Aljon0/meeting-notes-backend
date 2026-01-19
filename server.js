@@ -11,7 +11,15 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Middleware
-app.use(cors());
+// Update the CORS configuration
+app.use(cors({
+    origin: [
+      'http://localhost:5173', // Vite dev server
+      'http://localhost:3000', // Alternative dev port
+      'https://meeting-notes-x7x1.onrender.com' // Production frontend
+    ],
+    credentials: true
+  }));
 app.use(express.json({ limit: '10mb' }));
 
 // Validate API key before initializing Groq client
